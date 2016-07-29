@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<head>
+
+</head>
+<body>
+    <input type = "checkbox" value = "test_id" onclick = "filterItems()"><label>checked</label>
+    <input type = "checkbox" value = "ignore_me" onclick = "filterItems()"><label>unchecked</label>
+
+    <ul>
+        <li data-type = "test_id">Checked</li>
+        <li data-type = "ignore_me">Ignore me</li>
+    </ul>    
+    <script>
+        var checkboxes = document.querySelectorAll("input");
+        var items = document.querySelectorAll("li");
+
+        // Set unchecked by default
+        for (var i=0; i<checkboxes.length; i++)  {
+          if (checkboxes[i].type == 'checkbox')   {
+            checkboxes[i].checked = false;
+          }
+        }
+        
+        // Set items invisible by default
+        //        for (i = 0; i<items.length; i++) {
+        //            items[i].style.display = "none";
+        //        }
+        
+        
+        
+        // Checkbox logic
+        function filterItems() {
+            
+            // Cycle through every <input> checkbox
+            for (var checkbox_index = 0; checkbox_index < checkboxes.length; checkbox_index++) {
+                
+                // Cycle through every <li> element
+                for (var item_index = 0; item_index < items.length; item_index++) {
+                    
+                    // Store the attribute of <li> element as variable "attribute"
+                    var current_item = items[item_index];
+                    var current_checkbox = checkboxes[checkbox_index];
+                    var item_val = current_item.getAttribute("data-type");
+                    
+                    // Compares <input> "value" and attribute
+                    
+                    if (current_checkbox.value == item_val && current_checkbox.checked == true) {
+                        items[item_index].style.display = "none";
+                    }
+                    else if (current_checkbox.value == item_val && current_checkbox.checked == false) {
+                        items[item_index].style.display = "";
+                    }
+                }
+            }
+        }
+
+    </script>
+    
+</body>
