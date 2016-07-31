@@ -5,13 +5,13 @@ var dogs = document.querySelectorAll(".items-to-filter li");
 
 // TESTING EVENT.TARGET
 function alertTest(event) {
-    if (event.target.value == 'test') {
+    if (event.target.value === 'test') {
         alert("Testing!");
     }
 }
 
 // RESET VISIBILITY
-function makeInvisible() {
+function makeVisible() {
     for (var i = 0; i<dogs.length; i++) {
         dogs[i].style.display = "";
     }
@@ -46,7 +46,7 @@ function filterItems(event) {
             var wanted_tag = current_checkbox.value;
 
             // Check if wanted_tag is in tags
-            if (tags.includes(wanted_tag) == true) {
+            if (tags.includes(wanted_tag) === true) {
                 visible_dogs[item_index].style.display = ""; //show when checked
             } else {
                 visible_dogs[item_index].style.display = "none"; //hide when checked
@@ -66,7 +66,7 @@ function filterItems(event) {
             var wanted_tag = current_checkbox.value;
 
             // Check if wanted_tags is NOT in tags
-            if (tags.includes(wanted_tag) == false) {
+            if (tags.includes(wanted_tag) === false) {
                 dogs[item_index].style.display = ""; //show when unchecked
             }
         }
