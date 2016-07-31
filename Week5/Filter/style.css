@@ -1,0 +1,16 @@
+body {
+    margin: 10px 10px;
+}
+.dropdown-group, .dropdown-menu, #toggle-visibility {
+    margin-bottom: 10px;
+}
+
+#attention {
+    width:230px;
+}
+
+.items-to-filter {
+    padding: 10px 30px;
+    background-color: #eee;
+    max-width: 200px;
+}

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<!-- 
+CHANGES:
+* Removed div #dropdown-content
+* Added #btn-group to each #dropdown div
+* Added #attention for the Attention div
+* Used .includes() for checking Arrays
+* Added parameter wanted_tag to filterItems()
+* Added inverse filter (else case) for when user UNCHECKS an option
+-->
+<head>
+    <meta charset = "utf-8">
+    
+    <!--    BOOTSTRAP SETUP     -->
+    <meta name = "viewport" content = "width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    
+    <title>Filtering Example</title>
+    <link rel = "stylesheet" type = "text/css" href = "style.css">
+    <script  type="text/javascript" src="script.js" async></script>
+</head>
+ 
+<body>
+    
+<h1>Filtering Example</h1>
+<button id = "toggle-visibility" onclick="makeInvisible()">Reset</button>
+
+<div class = "dropdown-group">
+    <div class="dropdown btn-group">
+        <button class="dropbtn" data-toggle="dropdown">Fur type<span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li>
+                <input onclick="filterItems(event)" type="checkbox" value="short"> <label>Short</label>
+            </li>
+
+            <li>
+                <input onclick="filterItems(event)" type="checkbox" value="long"> <label>Long</label>
+            </li>
+
+            <li>
+                <input onclick="filterItems(event)" type="checkbox" value="curly"> <label>Curly</label>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="dropdown btn-group">
+        <button class="dropbtn" data-toggle="dropdown">Energy level<span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li>
+                <input onclick="filterItems(event)" type="checkbox" value="veryactive"> <label>Very active</label>
+            </li>
+
+            <li>
+                <input onclick="filterItems(event)" type="checkbox" value="moderatelyactive"> <label>Moderately Active</label>
+            </li>
+
+            <li>
+                <input onclick="filterItems(event)" type="checkbox" value="lazy"> <label>Lazy</label>
+            </li>
+        </ul>
+    </div>
+
+    <div class="dropdown btn-group">
+        <button class="dropbtn" data-toggle="dropdown">Friendliness<span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li>
+                <input onclick="filterItems(event)" type="checkbox" value="veryfriendly"> <label>Very friendly</label>
+            </li>
+
+            <li>
+                <input onclick="filterItems(event)" type="checkbox" value="moderatelyfriendly"> <label>Moderately friendly</label>
+            </li>
+
+            <li>
+                <input onclick="filterItems(event)" type="checkbox" value="aggressive"> <label>Not friendly</label>
+            </li>
+        </ul>
+    </div>
+
+    <div class="dropdown btn-group">
+        <button class="dropbtn" data-toggle="dropdown">Playfulness<span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li>
+                <input onclick="filterItems(event)" type="checkbox" value="veryplayful"> <label>Very playful</label>
+            </li>
+
+            <li>
+                <input onclick="filterItems(event)" type="checkbox" value="moderatelyplayful"> <label>Moderately playful</label>
+            </li>
+
+            <li>
+                <input onclick="filterItems(event)" type="checkbox" value="notplayful"> <label>Not playful</label>
+            </li>
+        </ul>
+    </div>
+
+    <div class="dropdown btn-group">
+        <button class="dropbtn" data-toggle="dropdown">Ease of grooming<span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li>
+                <input onclick="filterItems(event)" type="checkbox" value="easy"> <label>Easy</label>
+            </li>
+
+            <li>
+                <input onclick="filterItems(event)" type="checkbox" value="medium"> <label>Medium</label>
+            </li>
+
+            <li>
+                <input onclick="filterItems(event)" type="checkbox" value="hard"> <label>Hard</label>
+            </li>
+        </ul>
+    </div>
+
+    <div class="dropdown btn-group">
+        <button class="dropbtn" data-toggle="dropdown">Hypoallergenic<span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li>
+                <input onclick="filterItems(event)" type="checkbox" value="yes"> <label>Yes</label>
+            </li>
+
+            <li>
+                <input onclick="filterItems(event)" type="checkbox" value="no"> <label>No</label>
+            </li>
+        </ul>
+    </div>
+
+    <div class="dropdown btn-group">
+        <button class="dropbtn" data-toggle="dropdown">Attention<span class="caret"></span></button>
+        <ul class="dropdown-menu" id = "attention">
+            <li>
+                <input onclick="filterItems(event)" type="checkbox" value="needsalot"> <label>Needs a lot</label>
+            </li>
+
+            <li>
+                <input onclick="filterItems(event)" type="checkbox" value="needsamoderateamount"> <label>Needs a moderate amount</label>
+            </li>
+
+            <li>
+                <input onclick="filterItems(event)" type="checkbox" value="independent"> <label>Independent</label>
+            </li>
+        </ul>
+    </div>
+
+    <div class="dropdown btn-group">
+        <button class="dropbtn" data-toggle="dropdown">Size<span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li>
+                <input onclick="filterItems(event)" type="checkbox" value="small"> <label>Small</label>
+            </li>
+
+            <li>
+                <input onclick="filterItems(event)" type="checkbox" value="medium2"> <label>Medium</label>
+            </li>
+
+            <li>
+                <input onclick="filterItems(event)" type="checkbox" value="large"> <label>Large</label>
+            </li>
+        </ul>
+    </div>
+</div>    
+    
+    
+    
+<ul class="items-to-filter">
+    <li data-type="short veryactive veryfriendly veryplayful easy no needsalot large">Labrador</li>
+
+    <li data-type="short veryactive veryfriendly veryplayful easy no needsalot medium2">Boxer</li>
+    
+    <li data-type="short long moderatelyactive veryfriendly veryplayful easy no needsalot small">Chihuahua</li>
+    
+    <li data-type="curly veryactive veryfriendly veryplayful hard yes needsalot small medium2">Poodle</li>
+        
+    <li data-type="curly veryactive veryfriendly veryplayful easy yes independent small medium2">Labradoodle</li>
+    
+    <li data-type="short veryactive veryfriendly veryplayful medium no needsamoderateamount small">Jack Russell Terrier</li>
+   
+    <li data-type="short moderatelyactive veryfriendly veryplayful easy no needsamoderateamount medium2">Bulldog</li>
+
+</ul>
+
+<button onclick="alertTest(event)" value='test'>Alert!</button>
+</body>
+ 
+</html>
